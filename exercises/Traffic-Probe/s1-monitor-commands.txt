@@ -1,0 +1,3 @@
+mirroring_add 100 4
+table_add monitor pkt_clone 1 => 100
+table_add monitor pkt_clone 6 => 100

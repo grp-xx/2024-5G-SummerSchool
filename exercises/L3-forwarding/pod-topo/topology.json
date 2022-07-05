@@ -1,0 +1,24 @@
+{
+    "hosts": {
+        "h1":  { 
+                    "ip": "10.0.1.11/24", 
+                    "mac": "ca:fe:ba:be:ca:fe", 
+                    "commands" :  [ "route add default gw 10.0.1.1 dev eth0",
+                                    "arp -i eth0 -s 10.0.1.1 aa:aa:aa:aa:aa:aa"]
+                },    
+        "h2":  { 
+                    "ip": "10.0.3.22/24", 
+                    "mac": "de:ad:be:ef:fe:ed", 
+                    "commands" :  [ "route add default gw 10.0.3.1 dev eth0",
+                                    "arp -i eth0 -s 10.0.3.1 dd:dd:dd:dd:dd:dd"]
+                }
+    },  	
+    "switches": {
+        "s1": { "runtime_json" : "pod-topo/s1-runtime.json" },
+        "s2": { "runtime_json" : "pod-topo/s2-runtime.json" }
+    },
+    "links": [
+        ["h1", "s1-p1"], ["h2", "s2-p1"], ["s1-p2", "s2-p2"]
+    ]
+}
+

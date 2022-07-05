@@ -1,0 +1,8 @@
+table_clear ipv4_lpm
+table_add ipv4_lpm ipv4_forward 10.0.1.11/32 => ca:fe:ba:be:ca:fe 1
+table_add ipv4_lpm ipv4_forward 10.0.3.0/24  => cc:cc:cc:cc:cc:cc 2
+
+table_clear s_mac
+table_add s_mac set_smac 1 => aa:aa:aa:aa:aa:aa
+table_add s_mac set_smac 2 => bb:bb:bb:bb:bb:bb 
+

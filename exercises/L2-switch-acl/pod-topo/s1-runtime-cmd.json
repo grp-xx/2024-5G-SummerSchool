@@ -1,0 +1,56 @@
+{
+  "target": "bmv2",
+  "p4info": "build/l2_switch.p4.p4info.txt",
+  "bmv2_json": "build/l2_switch.json",
+  "table_entries": 
+  [
+    {
+      "table": "MyIngress.out_iface",
+      "default_action": true,
+      "action_name": "MyIngress.drop",
+      "action_params": { }
+    },
+    {
+      "table": "MyIngress.out_iface",
+      "match" : { 
+        "hdr.ethernet.dstAddr": ["00:00:0a:00:00:01"]
+      },
+      "action_name": "MyIngress.eth_forward",
+      "action_params": { 
+        "out_port": 1 
+      }
+    },
+    {
+      "table": "MyIngress.out_iface",
+      "match" : { 
+        "hdr.ethernet.dstAddr": ["00:00:0a:00:00:02"]
+      },
+      "action_name": "MyIngress.eth_forward",
+      "action_params": { 
+        "out_port": 2 
+      }
+    },
+    {
+      "table": "MyIngress.out_iface",
+      "match" : { 
+        "hdr.ethernet.dstAddr": ["00:00:0a:00:00:03"]
+      },
+      "action_name": "MyIngress.eth_forward",
+      "action_params": { 
+        "out_port": 3 
+      }
+    },
+    {
+      "table": "MyIngress.out_iface",
+      "match" : { 
+        "hdr.ethernet.dstAddr": ["00:00:0a:00:00:04"]
+      },
+      "action_name": "MyIngress.eth_forward",
+      "action_params": { 
+        "out_port": 4 
+      }
+    }
+  ] 
+
+}
+

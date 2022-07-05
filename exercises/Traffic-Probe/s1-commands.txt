@@ -1,0 +1,3 @@
+table_add out_iface eth_forward 00:00:0a:00:00:01 => 1
+table_add out_iface eth_forward 00:00:0a:00:00:02 => 2
+table_add out_iface eth_forward 00:00:0a:00:00:03 => 3
