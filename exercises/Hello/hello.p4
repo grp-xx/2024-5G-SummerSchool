@@ -57,8 +57,16 @@ control MyIngress(inout headers hdr,
                   inout standard_metadata_t standard_metadata) {
 
 
+    macAddr_t tmp;
  
-    apply { }
+    apply {
+
+        tmp = hdr.ethernet.srcAddr;
+        hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
+        hdr.ethernet.dstAddr = tmp;
+
+        standard_metadata.egress_spec = standard_metadata.ingress_port;
+     }
 }
 
 
