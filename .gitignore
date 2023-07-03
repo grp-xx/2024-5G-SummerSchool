@@ -1,0 +1,5 @@
+utils/__pycache__/
+utils/p4runtime_lib/__pycache__/
+exercises/Hello/build/
+exercises/Hello/logs/
+exercises/Hello/pcaps/
