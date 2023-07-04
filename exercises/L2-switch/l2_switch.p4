@@ -57,24 +57,24 @@ control MyIngress(inout headers hdr,
                   inout standard_metadata_t standard_metadata) {
 
     action drop() {
-        mark_to_drop(standard_metadata);
+        // ... 
     }
 
     action eth_forward(bit<9> out_port) {
-        standard_metadata.egress_spec = out_port;
+        // ... 
     }
 
 
     table out_iface {
         key = {
-            hdr.ethernet.dstAddr: exact;
+            // ... : ... ;
         }
         actions = {
             drop;
             eth_forward;
         }
         size = 8;
-        default_action = drop();
+        default_action = drop;
     }
 
 
@@ -82,7 +82,7 @@ control MyIngress(inout headers hdr,
 
 
     apply {
-            out_iface.apply();
+            //  ... 
     }
 
 

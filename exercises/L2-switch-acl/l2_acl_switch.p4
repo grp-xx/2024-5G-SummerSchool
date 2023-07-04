@@ -108,18 +108,18 @@ control MyEgress(inout headers hdr,
 
     table acl {
     key = {
-        hdr.ethernet.srcAddr: exact;
+        // ... : ... ;
     }
     actions = {
         block;
         NoAction;
     }
-    default_action = block();
+    // default_action = ...
     size = 8;
     }
 
     apply { 
-        acl.apply();
+        // ... 
     }
     
 }
