@@ -9,9 +9,9 @@
 typedef bit<48> macAddr_t;
 
 header ethernet_h {
-    // ... dstAddr;
-    // ... srcAddr;
-    // ... etherType;
+    macAddr_t dstAddr;
+    macAddr_t srcAddr;
+    bit<16> etherType;
 }
 
 struct metadata {
@@ -19,7 +19,7 @@ struct metadata {
 }
 
 struct headers {
-    //   ... ethernet;
+    ethernet_h ethernet;
 }
 
 
@@ -33,8 +33,8 @@ parser MyParser(packet_in packet,
                 inout standard_metadata_t standard_metadata) {
 
       state start{
-  	  // packet.extract(...);
-      //    transition ...;
+  	  packet.extract(hdr.ethernet);
+      transition accept;
       }
 
 }
@@ -59,13 +59,16 @@ control MyIngress(inout headers hdr,
 
     action swap_macs()
     {
-        // ...........
+        macAddr_t tmp;
+        tmp = hdr.ethernet.srcAddr;
+        hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
+        hdr.ethernet.dstAddr = tmp;
     }
  
     apply {
 
         swap_macs();
-        // standard_metadata.egress_spec = ... ;
+        standard_metadata.egress_spec = standard_metadata.ingress_port ;
      }
 }
 
@@ -80,8 +83,10 @@ control MyEgress(inout headers hdr,
                  inout standard_metadata_t standard_metadata) {  
 
 
+    counter(1,CounterType.packets) cc;
 
     apply {
+        cc.count(0);
     }
     
 }
@@ -93,9 +98,7 @@ control MyEgress(inout headers hdr,
 
 control MyComputeChecksum(inout headers  hdr, inout metadata meta) {
             
-
     apply { 
-
     }
 }
 
@@ -106,7 +109,7 @@ control MyComputeChecksum(inout headers  hdr, inout metadata meta) {
 control MyDeparser(packet_out packet, in headers hdr) {
     apply {
 		// parsed headers have to be added again into the packet
-		// packet.emit(...);
+		packet.emit(hdr.ethernet);
 	}
 }
 
