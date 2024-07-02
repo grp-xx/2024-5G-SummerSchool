@@ -4,4 +4,4 @@ To stop the text, "exit" from mininet, run "make stop" and "make clean" to remov
 Tables can be populated through:
 "simple_switch_CLI --thrift-port 9090 < s1-commands.txt"
 
-For more details, refer to the pdf presentation in the "5G-SummerSchool-2022" folder.
+For more details, refer to the pdf presentation in the folder.
